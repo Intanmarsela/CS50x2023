@@ -1,0 +1,128 @@
+Week 9 CS50 FLASH
+
+Building block that we leanred
+http://www.example.com/folder // folder in here called path or location.
+But to day we will call it router.
+
+http://www.example.com/router?key=value // these called parameter the key=value.
+
+http://www.example.com/router?key=value&key=value & is the one who seperate key and value.
+
+We will use Python with Flask
+Jinja is sythax that will wrap the place holder
+Flask is another frame work like library that we will learn
+
+to run flask in your Python type "flask run" in your terminal in the directory that py in it
+
+normally we will need app.py and template/ to create our own Amazon.com
+
+in this project we will use 4 files
+app.py ; where you write python code for your webapp
+requirement.txt ; just text file that explain things
+static/ ; static contetn, images, javascript, css, html
+templates/
+
+--py
+#say hello world
+from flask import Flask, render_template, request //this library called flask got 3things function called Flask, render_template, and variable request.
+
+app = Flask(__name__) // var app with return value Flask; the __name__ is for to check the name is main function. It refer to current file.
+
+@app.route("/") //If the user use (/) it will execute index
+def index():
+    return render_template ("index.html") // This will open the HTML file that we type in python.
+
+--py
+
+--html
+ 1 <!DOCTYPE html>
+ 2
+ 3 <html lang="en"> // language iis english
+ 4     <head>
+ 5          <meta name="viewport" content="initial-scale=1, width=device-width"> //for makeit sompatible for any device
+ 6          <title>hello</title>
+ 7     </head>
+ 8     <body>
+ 9          hello, world || hello,{(name)} // this is another way to output hello, and the {} is Jinja.
+10     </body>
+11 </html>
+--html
+
+--py
+ # Says hello to requesg.args["name"]
+
+from flask import Flask, render_template, request
+
+app= Flask(__name__)
+
+@app.route("/")
+def index():
+        if "name" in request.args: // request will be the key that is in url.
+            name= request.args["name"] // Dictionay will be the file that we will get from request
+        else:
+            name = "world"
+        return render_template("index.html", placeholder=name) // name is the name of the varialbe and placeholder is the
+        //placehorder in the html {(name)} a.k.a {(placeholder)}
+        //we could put "get" function in the line 61 "name = request.args.get("name","wordls")"
+        //In that code we will get the name and put "world" as the default name.
+--py
+
+--html
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+     <meta name="viewport" content="initial-scale=1, width=device-width">
+     <title>hello</title>
+  </head>
+  <body>
+     <form action="/greet" method="get"> // action will be name, so it will be route /greet.
+        <input autocomplete="off" autofocus name="name" placeholder="Name" type="text"> // autocomplete to make sure the user put an input
+        // autofocus to make the ccursor blink once it touch; placeholder will be the build in atributs.
+        <button type="submit">Greet</button>
+     </form>
+ </body>
+</html>
+--html
+
+--py
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+@app.route("/")
+def index(): //This is for the form to log in.
+    return render_template("index.html")
+
+@app.route("/greet")
+def greet(): //This is for the greeting. Or your page.
+    return render_template("greet.html", name=request.args.get("name", "world"))
+    //If I want the greet.html have acc to the url or router, that's why name=... in there.
+--py
+
+--html
+{% extends "layout.html" %}
+// this mean plug in whatever layout.html is. {()} Jinja is here to help.
+
+{% block body %}
+    hello, {{ name }}
+{% endblock %}
+// It could happen bc we put the route in the python and html read it with the help from Jinja
+--html
+
+Get is not always the best function for log in form. Bc the ID and Pass will shown in the URL,
+But we can fix it with changing the method in the form into menthod="post"
+--html
+<form action="/greet" method="post">
+--html
+but html will not support post yet, we need to inform python and do some changing
+--py
+
+ @app.route("/", methods=["POST"]) // our url will show going to greet instead of the user ID and Pass
+ def index():
+    if request.method == "POST":
+        return render_template("greet.html", name=request.form.get("name", "world"))
+        return render_template("index.html")
+
+--py
+

@@ -1,0 +1,76 @@
+Post could be used for send an item to cart, ect.
+While get just get a data for you
+
+Only use post for a button the other use get.
+
+Perl, is another language for build a webpage.
+# Implements a registration form using a select menu
+
+--app.py
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+SPORTS = [
+ "Basketball",
+ "Soccer",
+ "Ultimate Frisbee"
+]
+
+    @app.route("/")
+    def index():
+        return render_template("index.html", sports=SPORTS)
+
+ @app.route("/register", methods=["POST"])
+    def register():
+        # Validate submission
+        if not request.form.get("name") or request.form.get("sport") not in SPORTS:
+            return render_template("failure.html")
+        # Confirm registration
+        return render_template("success.html")
+
+--
+
+--indx.html
+{% extends "layout.html" %}
+
+{% block body %}
+    <h1>Register</h1>
+    <form action="/register" method="post">
+        <input autocomplete="off" autofocus name="name" placeholder="Name" type="text">
+        <select name="sport">
+            <option disabled selected>Sport</option>
+            {% for sport in sports %}
+                <option value="{{ sport }}">{{ sport }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Register</button> //for submiting the form
+<   /form>
+{% endblock %}
+
+--
+{% endfor %} is the closing syntax for Jinja
+
+For selecting options we can make a global variable and it will work same as option.
+
+We can put require in the <input require> so the user will have to fill the form before leaving.
+It will be able to give alert notification aswell
+
+Cookie is like a hand stamp, to recognize you all the time. So they don't have to log-in again and again.
+
+http header that make cookie
+cookie: session=value
+
+session; a function in Flask that will help you with cookie.
+
+if not session.get("name"); this line will redirect you to loginn if you are not logging in yet.
+
+Session will end when we close the tap, but it could plented in the device more than that.
+Each cookie will always be different.
+
+API
+It how you interact with some service.
+Webbase that could give you data from somewhere else
+like weather, real time covid case, etc
+
+

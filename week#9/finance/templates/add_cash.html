@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    add_cash
+{% endblock %}
+
+{% block main %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            CASH
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>Total Balance</th>
+            {% for cash in cash %}
+                <th> {{ cash.cash | usd}}</th>
+            {% endfor %}
+        </tr>
+    </tbody>
+</table>
+<br>
+<form action="/add_cash" method="POST">
+    <h2>ADD CASH</h2>
+    <lable>Amount: </lable>
+    <input type="number" name="cash-value" placeholder="min $100">
+    <button class="btn btn-primary" type="submit">Add Cash</button>
+</form>
+</table>
+
+{% endblock %}

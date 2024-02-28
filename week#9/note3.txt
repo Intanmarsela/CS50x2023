@@ -1,0 +1,71 @@
+Web frameworks make connecting process become alot more easier.
+
+One of the limitation for html is API.
+
+To put date
+--py
+from datetime import datetime
+from pytz import timezone
+
+app = flask(__name__)
+
+@app.route("/")
+def time():
+    now = datetime.now(timezone('America/New_York'))
+    return "The current date and time in Cambridge is {}".format(now)
+--
+
+run flask application through IDE
+--
+export FLASK_APP=application.py
+eport FLASK_DEBUG=1 // 1 mean true
+flask run
+--
+after you run it it will give you URL
+
+passing data via URLs, akin to using HTTP GET
+--
+@app.rout("/show/<number>")
+def show(number):
+    return "You passed in {}".format(number)
+--
+
+Passing data through html form using POST,
+--
+@app.route("/login",method=['GET','POST']) // we are not using GET but we are asking the function to
+GO and retrieve from the form the field called username.
+def login():
+    if not request.form.get("username")
+        return apology("must provide username") //if the user doesn't fill the form we will apologise.
+--
+
+If we use get request we will provide them a form.
+if we use post request we will expecting user to fill the form.
+
+some flask function
+redirect() // directing u
+url_for() // allowing you search smth iin url
+session() // a global variable to track the customer log-in a.k.a cookie
+render_template() // using it to mix html in python.
+
+More info about FLASK
+hhtp://flask.pocoo.org/docs/0.12/quickstart/
+
+More info about Jinja
+hhtp://jinja.pocoo.org/
+
+
+AJAX (formerly Asynchronous Javascript and XML)
+allowing us to dynamically update a webpage even more dynamically.
+
+to create asynchronous update page aka new/refershed page:
+var xhttp = new XMLHttpRequest();
+
+once you have an object you need to define its onready state change behaviour.
+Thipically this func is anonymous
+
+There are 5 stages 0-4
+0 = req not yet
+1,2,3 and 4 request finished
+the status property will be 200(ok)
+once that happend we can open() method to define the req and send() method 

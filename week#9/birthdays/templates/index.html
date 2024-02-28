@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="/static/styles.css" rel="stylesheet">
+        <title>Birthdays</title>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Birthdays</h1>
+        </div>
+        <div class="container">
+            <div class="section">
+
+                <h2>Add a Birthday</h2>
+                <form action="/" method="post">
+                    <tr>
+                        <td ></td>
+                        <input type="text" placeholder="Name" name="Name">
+                        <input type="number" min="1" max="12" placeholder="Month" name="Month">
+                        <input type="number" min="1" max="31" placeholder="Date" name="Date">
+                        <input type="submit" value="Add Birthday">
+                    </tr>
+                </form><!-- TODO: Create a form for users to submit a name, a month, and a day -->
+                <hr2>Delete Birthday</hr2>
+                <form action="/" method="get">
+                    <tr>
+                        <td></td>
+                        <input type="text" placeholder="Name" name="Del_Name">
+                        <input type="number" min="1" max="12" placeholder="Month" name="Del_Month">
+                        <input type="number" min="1" max="31" placeholder="Date" name="Del_Date">
+                        <input type="submit" value="Delete Birthday">
+                    </tr>
+                </form>
+            </div>
+            <div class="section">
+                <h2>All Birthdays</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Birthday</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for birthday in birthdays %}
+                            <tr>
+                                <td> {{birthday.name}}</td>
+                                <td> {{birthday.month}}/{{birthday.day}}</td>
+                            </tr>
+                        <!-- TODO: Loop through the database entries to display them in this table -->
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
