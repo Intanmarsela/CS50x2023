@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+        <script>
+            document.addEventListener('DOMContentLoaded', function(){
+                let correct = document.querySelector('.correct'); //for correct button
+                correct.addEventListener('click', function(){
+                    correct.style.backgroundColor = "green";
+                    document.querySelector("#answer1").innerHTML = "Correct!"
+                });
+                let incorrect = document.querySelectorAll(".incorrect"); //for incorrect button
+                for(let i = 0; i < incorrect.length; i++){
+                    incorrect[i].addEventListener('click', function(){
+                        incorrect[i].style.backgroundColor = "red";
+                        document.querySelector("#answer1").innerHTML = "Incorrect!";
+                    });
+                }
+
+                document.querySelector("#check").addEventListener ("click", function (){
+                    let input = document.querySelector("input");
+                    if(input.value.toLowerCase() == "venus"){
+                        input.style.backgroundColor = "green";
+                        document.querySelector("#answer2").innerHTML = "Correct!";
+                    }
+                    else{
+                        input.style.backgroundColor = "red";
+                        document.querySelector("#answer2").innertHTML = "incorrect!";
+                    }
+                } );
+            });
+
+                // TODO: Add code to check answers to questions
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <h3>What does the abbreviation “USB” stand for?</hr3>
+                <br>
+                <button type="text" class="correct" >Universal Serial Bus</button>
+                <button type="text" class="incorrect">Universal Side Buttom</button>
+                <button type="text" class="incorrect">Upside Bottom</button>
+                <button type="text" class="incorrect">Universal Serial Button</button>
+                <button type="text" class="incorrect">United Serial Block</button>
+                <p id="answer1"></p>
+                <!-- TODO: Add multiple choice question here -->
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <h3>What is the only planet in our solar system that rotates clockwise?</h3>
+                <form >
+                    <input type="text" placeholder=Planet>
+                    <button id="check">Check answer</button>
+                    <p id="answer2"></p>
+                </form>
+
+                <!-- TODO: Add free response question here -->
+            </div>
+        </div>
+    </body>
+</html>
